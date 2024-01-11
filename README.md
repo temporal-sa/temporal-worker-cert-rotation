@@ -1,7 +1,7 @@
 # Temporal Worker mTLS Certificate Rotation
 
 ## Background
-A Temporal cluster may use mTLS to authenticate Worker client connections.  This is the case with [Temporal Cloud](https://docs.temporal.io/cloud).  The Temporal Cloud docs provide instructions for generating client [certificates](https://docs.temporal.io/cloud/certificates) for mTLS authentication.  However, you will also need to plan the rotation of your Worker client certificates.
+A Temporal cluster may use mTLS to authenticate Worker client connections.  This is the case with [Temporal Cloud](https://docs.temporal.io/cloud).  The Temporal Cloud docs provide instructions for generating client [certificates](https://docs.temporal.io/cloud/certificates) for mTLS authentication.  However, you will also need to plan for the rotation of your client certificates.
 
 Certificate rotation can be done manually, although it is worth fully automating.  Also, it is desirable to rotate the certificates without restarting the Worker application.  A restart would result in clearing the Workflow [cache used in sticky execution](https://docs.temporal.io/workers#sticky-execution).  With an empty cache, a Workflow in progress would need to rebuild its state from scratch when the Workflow execution resumes.  The Worker would  retrieve the Workflow history from the Temporal server and replay the execution.  This is overhead that we would prefer to avoid. 
 
