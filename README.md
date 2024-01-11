@@ -161,22 +161,22 @@ func main() {
     clientKeyPath := "./secrets/yourkey.key"
     clientCertPath := "./secrets/yourcert.pem"
     ...
-
+    
     // Load the cert via the GetClientCertificate function in the ConnectionOptions of the Client
     temporalClient, err := client.Dial(client.Options{
         HostPort:  hostPort,
         Namespace: namespace,
         ConnectionOptions: client.ConnectionOptions{
             TLS: &tls.Config{
-				GetClientCertificate: func(info *tls.CertificateRequestInfo) (*tls.Certificate, error) {
+                GetClientCertificate: func(info *tls.CertificateRequestInfo) (*tls.Certificate, error) {
                     // Use the crypto/tls package to create a cert object
                     cert, err := tls.LoadX509KeyPair(clientCertPath, clientKeyPath)
-					if err != nil {
-						return nil, err
-					}
-					return &cert, nil
-				},
-			},
+                    if err != nil {
+                        return nil, err
+                    }
+                    return &cert, nil
+                },
+            },
         },
     })
     ...
