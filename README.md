@@ -40,7 +40,9 @@ If you don't have an existing Temporal namespace, you can [create](https://docs.
 tcld login
 
 # create the new namespace - this may take a few minutes
-tcld namespace create --namespace rotation-demo --region us-east-1 --ca-certificate "$(cat ./out/Rotation_Demo_CA.crt | base64)"
+tcld namespace create --namespace rotation-demo \
+    --region us-east-1 \
+    --ca-certificate "$(cat ./out/Rotation_Demo_CA.crt | base64)"
 
 # confirm the certificate for the namespace - my Temporal account id is 'sdvdw', yours will be different
 tcld namespace ca list -n rotation-demo.sdvdw
