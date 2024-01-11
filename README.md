@@ -105,8 +105,11 @@ spec:
 EOF
 ```
 
+
 ### 4. Install the cert-manager [csi-driver](https://cert-manager.io/docs/usage/csi/)
 Follow the instructions at https://cert-manager.io/docs/usage/csi-driver/#installation to install the csi-driver on your Kubernetes cluster.
+
+The `helm upgrade...` command worked for me. 
 
 
 ### 5. Configure your Temporal Worker
@@ -182,6 +185,7 @@ func main() {
 
 I have implemented the above approach in the [worker/main.go](./worker/main.go) file in this repo.
 
+
 ### 6. Deploy your Temporal Worker Pod with the csi-driver volume
 
 The Go application in this repository is available as a Docker image at `pvsone/rotation-demo-worker-go:1.0.0`.
@@ -231,6 +235,7 @@ Success!  We have achieved certificate rotation without restarting the Worker ap
 3. Run your non-Go Worker application along with a Go proxy sidecar.  The sidecar will handle the mTLS connection and the rotation of the client certificate.  I have implemented a [simple Temporal Go proxy](https://github.com/pvsone/temporal-grpc-proxy) that could easily be extended with `GetClientCertificate` approach in this guide.
 
 4. Consider Istio, or another similar service mesh.  Istio can handle mTLS connections and certificate rotation, through their sidecar proxy.
+
 
 ## What if I am not using Kubernetes?
 
