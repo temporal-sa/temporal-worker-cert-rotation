@@ -190,7 +190,7 @@ I have implemented the above approach in the [worker/main.go](./worker/main.go) 
 
 The Go application in this repository is available as a Docker image at `pvsone/rotation-demo-worker-go:1.0.0`.
 
-A sample Kubernetes Pod manifest is available at [manifests/pod.yaml](./manifests/pod.yaml).  The Pod uses the csi-driver to generate the client certificate files in the Pod's volume.  The following [volume attributes](https://cert-manager.io/docs/usage/csi-driver/#supported-volume-attributes) are used to configure the csi-driver:
+A sample Kubernetes Pod manifest is available at [manifests/pod.yaml](./manifests/pod.yaml).  The Pod uses the csi-driver to generate the client certificate files as a Pod volume.  The following [volume attributes](https://cert-manager.io/docs/usage/csi-driver/#supported-volume-attributes) are used to configure the csi-driver:
 ```yaml
         csi.cert-manager.io/issuer-name: rotation-demo-ca-issuer
         csi.cert-manager.io/common-name: rotation-demo-worker
