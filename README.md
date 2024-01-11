@@ -116,7 +116,7 @@ The `helm upgrade...` command worked for me.
 
 A Temporal Worker uses a Temporal Client to connect to the Temporal server.  And the Temporal Client requires a client certificate to authenticate to the Temporal server.  The connection is a long-lasting connection through which the Worker polls for tasks on a task queue.  
 
-However, the Temporal Cloud frontend closes this connection every 5 minutes.  When the connection is closed the Worker, using the Client, will establish a new connection.  (Note: in self-hosted clusters you change the 5m default using the `frontend.keepAliveMaxConnectionAge` parameter.)
+However, the Temporal Cloud frontend closes this connection every 5 minutes.  When the connection is closed, the Worker, using the Client, will establish a new connection.  (Note: in self-hosted clusters you change the 5m default using the `frontend.keepAliveMaxConnectionAge` parameter.)
 
 In a typical Worker program, the certificate files are read once during the Worker initialization.  The certificate data is then supplied to the Client in the connection options.  When the Worker reconnects to Temporal Cloud (after 5 minutes), the static certificate data will again be used.  We see this pattern in the code snippet within the Go SDK developer's guide under [How to connect to Temporal Cloud](https://docs.temporal.io/dev-guide/go/foundations#connect-to-temporal-cloud):
 ```go
