@@ -91,7 +91,9 @@ The [default static configuration](https://cert-manager.io/docs/installation/#de
 
 First, create a Kubernetes Secret containing the CA certificate key pair:
 ```bash
-kubectl create secret tls rotation-demo-ca-key-pair --cert=out/Rotation_Demo_CA.crt --key=out/Rotation_Demo_CA.key
+kubectl create secret tls rotation-demo-ca-key-pair \
+    --cert=out/Rotation_Demo_CA.crt \
+    --key=out/Rotation_Demo_CA.key
 ```
 
 Next, create a CA Issuer to issue client certificates signed by the CA certificate:
