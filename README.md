@@ -114,7 +114,7 @@ The `helm upgrade...` command worked for me.
 
 ### 5. Configure your Temporal Worker
 
-A Temporal Worker uses a Temporal Client to connect to the server.  The Temporal Client uses the client certificate to authenticate to the Temporal Server.  The connection is a long-lasting connection through which the Worker polls for tasks on a task queue.  
+A Temporal Worker uses a Temporal Client to connect to the Temporal server.  And the Temporal Client requires a client certificate to authenticate to the Temporal server.  The connection is a long-lasting connection through which the Worker polls for tasks on a task queue.  
 
 However, the Temporal Cloud frontend closes this connection every 5 minutes.  When the connection is closed the Worker, using the Client, will establish a new connection.  (Note: in self-hosted clusters you change the 5m default using the `frontend.keepAliveMaxConnectionAge` parameter.)
 
