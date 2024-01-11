@@ -66,7 +66,7 @@ certstrap request-cert --common-name rotation-demo-cli-client --passphrase ""
 # sign the client certificate using the CA certificate
 certstrap sign rotation-demo-cli-client --CA "Rotation Demo CA"
 
-# test the setup using the `temporal` CLI
+# test the certificate using the `temporal` CLI
 temporal operator namespace describe \
     --address rotation-demo.sdvdw.tmprl.cloud:7233 \
     --tls-cert-path ./out/rotation-demo-cli-client.crt \
