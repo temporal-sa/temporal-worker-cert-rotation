@@ -211,7 +211,7 @@ Deploy the Pod:
 kubectl apply -f manifests/pod.yaml
 ```
 
-Once deployed, you can inspect the Pod filesystem to see that the certificate files in the `/certs` directory are overwritten before the 5 minute duration expires.
+Once deployed, you can inspect the Pod filesystem to see that the certificate files in the `/certs` directory are overwritten with new, valid certificate files before the 5 minute duration expires.
 
 Additionally you can see from the Pod logs that the `GetClientCertificate` function is called every 5 minutes to load the updated certificate files:
 ```sh
