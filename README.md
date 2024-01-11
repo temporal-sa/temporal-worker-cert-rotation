@@ -222,7 +222,7 @@ Additionally you can see from the Pod logs that the `GetClientCertificate` funct
 ...
 ```
 
-Feel free to run some tests before, during and after the 5 minute intervals.  You should not experience any connection failures due to certificate expiration or rotation. This repo does not include a starter program for the Workflow, but you can use the CLI as in:
+Feel free to run some tests before, during and after the 5 minute intervals.  You should not experience any connection failures due to certificate expiration or rotation. This repo does not include a starter program for the Workflow, but you can use the `temporal` CLI:
 ```bash
 temporal workflow execute --type GreetSomeone --task-queue greeting-tasks --input '"Rotey McRoteface"'
 ```
