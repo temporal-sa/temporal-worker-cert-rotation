@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	// get env values; validation and error handling omitted for brevity
 	hostPort := os.Getenv("TEMPORAL_ADDRESS")
 	namespace := os.Getenv("TEMPORAL_NAMESPACE")
 	clientCertPath := os.Getenv("TEMPORAL_TLS_CERT")
