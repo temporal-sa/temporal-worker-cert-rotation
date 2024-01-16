@@ -24,7 +24,7 @@ Let's go through each of these steps in detail.
 
 
 ### 1: Create a CA certificate
-We will use [certstrap](https://github.com/square/certstrap) to bootstrap the CA certificate.  Certstrap is one of many tools that can create CAs.  It can also create and sign client certificates.  On our Kubernetes cluster, we will use cert-manager to create and sign the client certificates.  Off cluster we will create and sign client certs with certstrap (an optional step below).
+We will use [certstrap](https://github.com/square/certstrap) to bootstrap the CA certificate.  Certstrap is one of many tools that can create CAs.  It can also create and sign client certificates.  On our Kubernetes cluster, we will use **cert-manager** (instructions below) to create and sign the client certificates.  *Off cluster* we will create and sign client certs with certstrap (an optional step below).
 
 Generate the CA Certificate:
 ```bash
