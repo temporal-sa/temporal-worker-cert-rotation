@@ -204,7 +204,7 @@ A sample Kubernetes Pod manifest is available at [manifests/pod.yaml](./manifest
 
 Based on the above settings, the cert-manager csi-driver will generate a client certificate with a common-name of `rotation-demo-worker` and a validity duration of 5 minutes.  The client certificate will be signed by the Issuer we created in step 3, `rotation-demo-ca-issuer`.  The FS group for the written files will be 1000.
 
-Finally, the driver will keep track the certificate in order to monitor when it should be marked for renewal.  When this happens, the driver will request a new signed certificate, and overwrite the existing certificate in the path.  Magic!
+Finally, the driver will keep track the certificate in order to monitor when it should be marked for renewal.  When this happens, the driver will request a new signed certificate, and overwrite the existing certificate in the path.  Magic! 🪄
 
 Deploy the Pod:
 ```bash
