@@ -113,7 +113,7 @@ EOF
 ### 4. Install the cert-manager [csi-driver](https://cert-manager.io/docs/usage/csi/)
 Follow the instructions at https://cert-manager.io/docs/usage/csi-driver/#installation to install the csi-driver on your Kubernetes cluster.
 
-The `helm upgrade...` command worked for me. 
+The `helm upgrade ...` command worked for me. 
 
 
 ### 5. Configure your Temporal Worker
