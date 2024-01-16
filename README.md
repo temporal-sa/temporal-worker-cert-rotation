@@ -8,8 +8,8 @@ Certificate rotation can be done manually, although it is worth fully automating
 ## Pre-requisites
 This guide assumes that:
 * You use Temporal Cloud (although this guide applies to self-hosted Temporal clusters too).
-* You write Workers using the Temporal Go SDK (if not, see [What if I am not using the Go SDK?](#what-if-i-am-not-using-the-go-sdk) below).
-* You deploy Worker applications to Kubernetes (if not, see [What if I am not using Kubernetes?](#what-if-i-am-not-using-kubernetes) below).
+* You write Workers using the Temporal Go SDK (if not, see [What if I am not using the Go SDK?](#what-if-i-am-not-using-the-go-sdk)).
+* You deploy Worker applications to Kubernetes (if not, see [What if I am not using Kubernetes?](#what-if-i-am-not-using-kubernetes)).
 
 ## Overview
 The steps to setup certificate rotation for a Temporal Go Worker on Kubernetes are:
