@@ -3,7 +3,7 @@
 ## Background
 A Temporal cluster may use mTLS to authenticate Worker client connections.  This is the case with [Temporal Cloud](https://docs.temporal.io/cloud).  The Temporal Cloud docs provide instructions for generating client [certificates](https://docs.temporal.io/cloud/certificates) for mTLS authentication.  However, you will also need to plan for the *rotation* of your client certificates.
 
-Certificate rotation can be done manually, although it is worth fully automating.  Also, it is desirable to rotate the certificates without restarting the Worker application.  A restart would result in clearing the Workflow [cache used in sticky execution](https://docs.temporal.io/workers#sticky-execution).  With an empty cache, a Workflow in progress would need to rebuild its state from scratch when the Workflow execution resumes.  The Worker would  retrieve the Workflow history from the Temporal server and replay the execution.  This would result in network and processing overhead that we would prefer to avoid. 
+Certificate rotation can be done manually, although it is worth fully automating.  Also, it is desirable to rotate the certificates without restarting the Worker application.  A restart would result in clearing the Workflow [cache used in sticky execution](https://docs.temporal.io/workers#sticky-execution).  With an empty cache, a Workflow in progress would need to rebuild its state from scratch when the Workflow execution resumes.  The Worker would  retrieve the Workflow history from the Temporal service and replay the execution.  This would result in network and processing overhead that we would prefer to avoid. 
 
 ## Pre-requisites
 This guide assumes that:
@@ -118,7 +118,7 @@ The `helm upgrade ...` command worked for me.
 
 ### 5. Configure your Temporal Worker
 
-A Temporal Worker uses a Temporal Client to connect to the Temporal server.  And the Temporal Client requires a client certificate to authenticate to the Temporal server.  The connection is a long-lasting connection through which the Worker polls for tasks on a task queue.  
+A Temporal Worker uses a Temporal Client to connect to the Temporal service.  And the Temporal Client requires a client certificate to authenticate to the Temporal service.  The connection is a long-lasting connection through which the Worker polls for tasks on a task queue.  
 
 However, the Temporal Cloud frontend closes this connection every 5 minutes.  When the connection is closed, the Worker, using the Client, will establish a new connection.  (Note: in self-hosted clusters the 5m default is configurable via the `frontend.keepAliveMaxConnectionAge` parameter.)
 
