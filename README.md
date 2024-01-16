@@ -156,7 +156,7 @@ the [Certificates](https://pkg.go.dev/crypto/tls#Config.Certificates) option.  T
 However, the Go docs describe an alternative to `Certificates`:
 > Clients doing client-authentication may set either Certificates or GetClientCertificate.
 
-Using the [GetClientCertificate](https://pkg.go.dev/crypto/tls#Config.GetClientCertificate) option we can define a function that will be called each time the connection is created.  We can load the certificate data dynamically each time, rather than only once on initialization.  This allows us to achieve certificate rotation without requiring a restart of the Worker application.
+Using the [GetClientCertificate](https://pkg.go.dev/crypto/tls#Config.GetClientCertificate) option we can define a function that will be called *each time* the connection is created.  We can load the certificate data dynamically each time, rather than only once on initialization.  This allows us to achieve certificate rotation without requiring a restart of the Worker application.
 
 Here is the code snippet above, updated to use `GetClientCertificate` instead of `Certificates`:
 ```go
