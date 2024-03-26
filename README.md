@@ -235,9 +235,44 @@ Success!  We have achieved certificate rotation without restarting the Worker ap
 
 ## What if I am not using the Go SDK?
 
-1. Investigate if your language/SDK supports dynamic loading of the client certificate. I have not fully researched each language/SDK, it is on the TODO list :)
+1. At this time, there is known solution for Java (see below), but there is not a direct way for Python, TypeScript or .NET to dynamically, or periodically, reload the client key and certificate.  For those languages see options 2, 3, or 4 below.
 
-    In **Java** you can use [AdvancedTlsX509KeyManager](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html) with [updateIdentityCredentialsFromFile](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html#updateIdentityCredentialsFromFile(java.io.File,java.io.File,long,java.util.concurrent.TimeUnit,java.util.concurrent.ScheduledExecutorService)) to read private key and certificate chains from the local file paths periodically, and update the cached identity credentials if they are both updated.
+    In **Java** you can use [AdvancedTlsX509KeyManager](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html) with [updateIdentityCredentialsFromFile](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html#updateIdentityCredentialsFromFile(java.io.File,java.io.File,long,java.util.concurrent.TimeUnit,java.util.concurrent.ScheduledExecutorService)) to read the private key and certificate chains from the local file paths periodically.
+
+    Here is an example of how to use it:
+    ```java
+    String address = "namespace.account.temporal.cloud:7233";
+    String tlsCertPath = "/path/to/tls.crt";
+    String tlsKeyPath = "/path/to/tls.key"; // in pkcs8 format
+
+    // Create a key manager that will update the identity credentials from the files every 5 minutes
+    AdvancedTlsX509KeyManager keyManager = new AdvancedTlsX509KeyManager();
+    keyManager.updateIdentityCredentialsFromFile(
+            new File(tlsKeyPath), new File(tlsCertPath),
+            5, TimeUnit.MINUTES,
+            Executors.newSingleThreadScheduledExecutor());
+
+    // Build the client ssl context and configure for gRPC with the advanced key manager
+    SslContextBuilder sslContextBuilder = SslContextBuilder.forClient();
+    GrpcSslContexts.configure(sslContextBuilder);
+    SslContext sslContext = sslContextBuilder.keyManager(keyManager).build();
+
+    // Generate the gRPC stubs using the client ssl context
+    WorkflowServiceStubs service = WorkflowServiceStubs.newServiceStubs(
+            WorkflowServiceStubsOptions.newBuilder()
+                    .setTarget(address)
+                    .setSslContext(sslContext)
+                    .build()
+    );
+
+    // the rest of your worker code as normal, elided for brevity
+    WorkflowClient client = WorkflowClient.newInstance(...);
+    WorkerFactory factory = WorkerFactory.newInstance(...);
+    Worker worker = factory.newWorker(...);
+    worker.registerWorkflowImplementationTypes(...);
+    worker.registerActivitiesImplementations(...);
+    factory.start();
+    ```
 
 2. Consider if a rolling restart of your Worker Pods is acceptable.  For some use cases the overhead of terminating the Workers, and rebuilding the cache may not be a concern.
 
