@@ -235,7 +235,7 @@ Success!  We have achieved certificate rotation without restarting the Worker ap
 
 ## What if I am not using the Go SDK?
 
-1. At this time, there is known solution for Java (see below), but there is not a direct way for Python, TypeScript or .NET to dynamically, or periodically, reload the client key and certificate.  For those languages see options 2, 3, or 4 below.
+1. At this time, there is a known solution for Java (see below), but there is not a direct way for Python, TypeScript or .NET to dynamically, or periodically, reload the client key and certificate.  For those languages see options 2, 3, or 4 below.
 
     In **Java** you can use [AdvancedTlsX509KeyManager](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html) with [updateIdentityCredentialsFromFile](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html#updateIdentityCredentialsFromFile(java.io.File,java.io.File,long,java.util.concurrent.TimeUnit,java.util.concurrent.ScheduledExecutorService)) to read the private key and certificate chains from the local file paths periodically.
 
