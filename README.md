@@ -237,6 +237,8 @@ Success!  We have achieved certificate rotation without restarting the Worker ap
 
 1. Investigate if your language/SDK supports dynamic loading of the client certificate. I have not fully researched each language/SDK, it is on the TODO list :)
 
+    In **Java** you can use [AdvancedTlsX509KeyManager](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html) with [updateIdentityCredentialsFromFile](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html#updateIdentityCredentialsFromFile(java.io.File,java.io.File,long,java.util.concurrent.TimeUnit,java.util.concurrent.ScheduledExecutorService)) to read private key and certificate chains from the local file paths periodically, and update the cached identity credentials if they are both updated.
+
 2. Consider if a rolling restart of your Worker Pods is acceptable.  For some use cases the overhead of terminating the Workers, and rebuilding the cache may not be a concern.
 
 3. Run your non-Go Worker application along with a Go proxy sidecar.  The sidecar will handle the mTLS connection and the rotation of the client certificate.  I have implemented a [simple Temporal Go proxy](https://github.com/pvsone/temporal-grpc-proxy) that could easily be extended with `GetClientCertificate` approach in this guide.
