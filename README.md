@@ -235,7 +235,7 @@ Success!  We have achieved certificate rotation without restarting the Worker ap
 
 ## What if I am not using the Go SDK?
 
-1. There is a solution for Java (see below), but, at this time, there isn't a direct way for Python, TypeScript or .NET to dynamically, or periodically, reload the client key and certificate (however, this will be coming soon - you can follow [this issue](https://github.com/temporalio/sdk-core/issues/477) for the latest status).  For those languages see options 2, 3, or 4 below.
+1. Dynamic reloading of client certificates is also supported in Java, Python and .NET.  TypeScript support is in progress, and you can follow the status on [this github issue](https://github.com/temporalio/features/issues/471).  Official samples for each SDK are also forthcoming, but in the meantime I have used the below snippet successfully in Java.
 
     In **Java** you can use [AdvancedTlsX509KeyManager](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html) with [updateIdentityCredentialsFromFile](https://grpc.github.io/grpc-java/javadoc/io/grpc/util/AdvancedTlsX509KeyManager.html#updateIdentityCredentialsFromFile(java.io.File,java.io.File,long,java.util.concurrent.TimeUnit,java.util.concurrent.ScheduledExecutorService)) to read the private key and certificate chains from the local file paths periodically.
 
